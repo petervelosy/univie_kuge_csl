@@ -11,7 +11,7 @@
     <updated>2024-03-17T19:02:00+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
-  <locale xml:lang="en">
+  <locale xml:lang="de">
     <terms>
       <term name="editor" form="verb-short">Hg.</term>
       <term name="translator" form="verb-short">trans.</term>
@@ -379,8 +379,8 @@
   <macro name="container-title-note">
     <group delimiter=" ">
       <choose>
-        <if type="chapter entry-dictionary entry-encyclopedia paper-conference" match="any">
-          <text term="in"/>
+        <if type="chapter entry-dictionary entry-encyclopedia paper-conference article-journal article-newspaper" match="any">
+          <text term="in" text-case="lowercase" suffix=":"/>
         </if>
       </choose>
       <choose>
@@ -391,7 +391,7 @@
           <text variable="container-title" text-case="title" font-style="italic" suffix=" (blog)"/>
         </else-if>
         <else-if type="bill legislation legal_case" match="none">
-          <text variable="container-title" text-case="title" font-style="italic"/>
+          <text variable="container-title" text-case="title"/>
         </else-if>
       </choose>
     </group>
@@ -399,8 +399,8 @@
   <macro name="container-title">
     <group delimiter=" ">
       <choose>
-        <if type="chapter entry-dictionary entry-encyclopedia paper-conference" match="any">
-          <text term="in" text-case="capitalize-first"/>
+        <if type="chapter entry-dictionary entry-encyclopedia paper-conference article-journal article-newspaper" match="any">
+          <text term="in" text-case="lowercase" suffix=":"/>
         </if>
       </choose>
       <choose>
@@ -411,7 +411,7 @@
           <text variable="container-title" text-case="title" font-style="italic" suffix=" (blog)"/>
         </else-if>
         <else-if type="bill legislation legal_case" match="none">
-          <text variable="container-title" text-case="title" font-style="italic"/>
+          <text variable="container-title" text-case="title"/>
         </else-if>
       </choose>
     </group>
@@ -787,6 +787,13 @@
     </choose>
   </macro>
   <macro name="issued">
+    <date variable="issued" form="numeric">
+    <date-part name="year"/>
+    <date-part name="month"/>
+    <date-part name="day"/>
+    </date>
+  </macro>
+  <macro name="issued-short">
     <date variable="issued">
     <date-part name="year"/>
     </date>
@@ -1034,20 +1041,20 @@
   <macro name="issue-note">
     <choose>
       <if type="bill legislation legal_case" match="any">
-        <text macro="issued" prefix="(" suffix=")"/>
+        <text macro="issued-short" prefix="(" suffix=")"/>
       </if>
       <else-if type="article-journal">
         <choose>
           <if variable="volume issue" match="any">
-            <text macro="issued"/>
+            <text macro="issued-short"/>
           </if>
           <else>
-            <text macro="issued"/>
+            <text macro="issued-short"/>
           </else>
         </choose>
       </else-if>
       <else-if type="article-newspaper">
-        <text macro="issued"/>
+        <text macro="issued-short"/>
       </else-if>
       <else-if type="manuscript thesis speech" match="any">
         <group delimiter=", " prefix="(" suffix=")">
@@ -1059,7 +1066,7 @@
           <text variable="event"/>
           <text variable="event-place"/>
           <text variable="publisher"/>
-          <text macro="issued"/>
+          <text macro="issued-short"/>
         </group>
       </else-if>
       <!-- <else-if variable="publisher-place event-place publisher" match="any">
@@ -1076,7 +1083,7 @@
         </group>
       </else-if> -->
       <else>
-        <text macro="issued"/>
+        <text macro="issued-short"/>
       </else>
     </choose>
   </macro>
