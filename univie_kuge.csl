@@ -11,7 +11,7 @@
     <updated>2024-03-17T19:02:00+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
-  <locale xml:lang="de">
+  <locale xml:lang="en">
     <terms>
       <term name="editor" form="verb-short">Hg.</term>
       <term name="translator" form="verb-short">trans.</term>
@@ -562,6 +562,7 @@
                 <text variable="page"/>
                 <choose>
                   <if locator="page" match="any">
+                    <label variable="locator" form="short"/>
                     <text variable="locator"/>
                   </if>
                   <else>
@@ -841,16 +842,18 @@
                   <label variable="locator" form="short"/>
                 </else>
               </choose>
-              <text variable="locator"/>
+              <text variable="locator" form="short"/>
             </group>
           </if>
           <else-if type="book graphic motion_picture report song" match="any">
             <group delimiter=":">
               <number variable="volume" form="numeric"/>
+              <label variable="locator" form="short"/>
               <text variable="locator"/>
             </group>
           </else-if>
           <else>
+            <label variable="locator" form="short"/>
             <text variable="locator"/>
           </else>
         </choose>
@@ -1153,7 +1156,7 @@
       <else-if type="article-journal">
         <choose>
           <if variable="issue volume" match="any">
-            <text macro="issued" prefix="(" suffix=")"/>
+            <text macro="issued" prefix=", " suffix=""/>
           </if>
           <else>
             <text macro="issued"/>
